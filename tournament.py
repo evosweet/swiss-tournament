@@ -16,7 +16,7 @@ def deleteMatches():
     try:
         con = connect()
         cur = con.cursor()
-        cur.execute("truncate match CASCADE;")
+        cur.execute("truncate match CASCADE")
         con.commit()
     except psycopg2.DatabaseError, error:
         print error
@@ -25,13 +25,12 @@ def deleteMatches():
             con.close()
 
 
-
 def deletePlayers():
     """Remove all the player records from the database."""
     try:
         con = connect()
         cur = con.cursor()
-        cur.execute("truncate players CASCADE;")
+        cur.execute("truncate players CASCADE")
         con.commit()
     except psycopg2.DatabaseError, error:
         print error
@@ -45,7 +44,7 @@ def countPlayers():
     try:
         con = connect()
         cur = con.cursor()
-        cur.execute("select count(id) from players;")
+        cur.execute("select count(id) from players")
         return cur.fetchone()[0]
     except psycopg2.DatabaseError, error:
         print error
@@ -113,13 +112,15 @@ def playerStandings():
 
 
 
-def reportMatch(winner, loser, tournament_id):
+def reportMatch(winner, loser, tournament_id): 
     """Records the outcome of a single match between two players.
 
     Args:
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
+    tournament id added to keep track of which tournament the player is playing in
     """
+
     try:
         con = connect()
         cur = con.cursor()
@@ -173,3 +174,35 @@ def swissPairings():
             con.close()
 
 
+
+#tournament methods
+def deleteTournaments():
+    """ delete all tournaments """
+    try:
+        con = connect()
+        cur = con.cursor()
+        cur.execute("truncate tournament CASCADE")
+        con.commit()
+    except psycopg2.DatabaseError, error:
+        print error
+    finally:
+        if con:
+            con.close()
+
+def createTournament(name):
+    """ create new tournament """
+    try:
+        con = connect()
+        cur = con.cursor()
+        cur.execute("insert into tournament (name) values(%s) RETURNING id", (name,))
+        con.commit()
+        tour_id = cur.fetchone()[0]
+        return tour_id
+    except psycopg2.DatabaseError, error:
+        print error
+    finally:
+        if con:
+            con.close()
+
+deleteTournaments()
+print createTournament('war hammer')

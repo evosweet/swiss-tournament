@@ -33,3 +33,14 @@ CREATE TABLE match (
 
 -- create standings view
 CREATE VIEW standings  as  select p.id, p.name, count(m.winner) as wins from players as p left join match m on p.id = m.winner group by p.name, p.id order by count(m.winner);
+
+
+-- appliation selects
+-- truncate match CASCADE
+-- truncate players CASCADE
+-- select count(id) from players
+-- insert into players (name) values(%s)
+-- select count(id) from match where player_one = %s or player_two = %s
+-- insert into match (player_one, player_two, tour_id, winner) values(%s, %s, %s, %s)
+-- select id,name from standings order by wins desc
+

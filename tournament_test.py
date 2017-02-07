@@ -73,7 +73,8 @@ def testReportMatches():
     Test that matches are reported properly.
     Test to confirm matches are deleted properly.
     """
-    tour_id = 1
+    deleteTournaments() #truncate all tournaments
+    tour_id = createTournament('war hammer') #tournament id added to test
     deleteMatches()
     deletePlayers()
     registerPlayer("Bruno Walton")
@@ -108,7 +109,8 @@ def testPairings():
     """
     Test that pairings are generated properly both before and after match reporting.
     """
-    tour_id = 1
+    deleteTournaments() #truncate all tournaments
+    tour_id = createTournament('war hammer') #tournament id added to test
     deleteMatches()
     deletePlayers()
     registerPlayer("Twilight Sparkle")
