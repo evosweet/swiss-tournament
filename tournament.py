@@ -204,5 +204,29 @@ def createTournament(name):
         if con:
             con.close()
 
-deleteTournaments()
-print createTournament('war hammer')
+
+def playerStandingsWithTour():
+    try:
+        con = connect()
+        cur = con.cursor()
+        sub_cur = con.cursor()
+        cur.execute("select id,name,wins from standings")
+        stand_list = []
+        if cur:
+            for stand in cur:
+                sub_cur.execute(
+                    "select count(id),tour_id from match where player_one = %s" \
+                    "or player_two = %s group by tour_id",
+                    (stand[0], stand[0]))
+                match_count = sub_cur.fetchone()
+                stand_list.append((stand[0], stand[1], stand[2], match_count[0], match_count[1]))
+            return stand_list
+        else:
+            return []
+    except psycopg2.DatabaseError as error:
+        print error
+    finally:
+        if con:
+            con.close()
+
+print playerStandingsWithTour()
