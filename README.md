@@ -20,4 +20,4 @@
 ### Extra credit
 
 * multi Tournament support added 
-#### Tournament table and delete `deleteTournaments`, create `createTournament` and standings by Tournament`playerStandingsWithTour` methods added.
+ * Tournament table and delete `deleteTournaments`, create `createTournament` and standings by Tournament`playerStandingsWithTour` methods added.
