@@ -206,6 +206,7 @@ def createTournament(name):
 
 
 def playerStandingsWithTour():
+    """ Get player standings Group by tournament"""
     try:
         con = connect()
         cur = con.cursor()
@@ -228,5 +229,4 @@ def playerStandingsWithTour():
     finally:
         if con:
             con.close()
-
-print playerStandingsWithTour()
+            
