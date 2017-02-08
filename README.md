@@ -21,3 +21,11 @@
 
 * multi Tournament support added 
  * Tournament table, delete `deleteTournaments`, create `createTournament` and standings by Tournament`playerStandingsWithTour` methods added.
+
+
+
+ ## How to run a successful Tournament
+
+ #### to configure the database from the pqsl command line run `\i` with the file path of the sql file `tournament.sql`.
+* Example
+    * `\i /vagrant/tournament/tournament.sql`

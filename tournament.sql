@@ -7,7 +7,15 @@
 -- these lines here.
 
 -- create schema
+DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
+\C tournament
+
+-- Drop tables
+
+DROP TABLE IF EXISTS tournament.players CASCADE;
+DROP TABLE IF EXISTS tournament.tournament CASCADE;
+DROP TABLE IF EXISTS tournament.match CASCADE;
 
 
 -- create players tables 
@@ -25,22 +33,10 @@ CREATE TABLE tournament (
 -- create match table
 CREATE TABLE match (
     id serial primary key, 
-    player_one serial references players(id),
-    player_two serial references players(id),    
-    tour_id serial references tournament(id), 
-    winner serial references players(id)
+    winner INTEGER references players(id),
+    loser INTEGER references players(id),    
+    tour_id INTEGER references tournament(id) 
 );
 
 -- create standings view
-CREATE VIEW standings  as  select p.id, p.name, count(m.winner) as wins from players as p left join match m on p.id = m.winner group by p.name, p.id order by count(m.winner);
-
-
--- appliation selects
--- truncate match CASCADE
--- truncate players CASCADE
--- select count(id) from players
--- insert into players (name) values(%s)
--- select count(id) from match where player_one = %s or player_two = %s
--- insert into match (player_one, player_two, tour_id, winner) values(%s, %s, %s, %s)
--- select id,name from standings order by wins desc
-
+CREATE VIEW standings as select p.id, p.name, count(m.winner) as wins from players as p left join match m on p.id = m.winner group by p.name, p.id order by count(m.winner);
