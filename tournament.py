@@ -212,4 +212,3 @@ def playerStandingsWithTour():
     finally:
         if con:
             con.close()
-            
