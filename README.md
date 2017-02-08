@@ -29,3 +29,6 @@
  #### to configure the database from the pqsl command line run `\i` with the file path of the sql file `tournament.sql`.
 * Example
     * `\i /vagrant/tournament/tournament.sql`
+
+#### To execute all test cases, from your command line run  `python tournament_test.py`
+
