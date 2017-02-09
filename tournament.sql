@@ -9,13 +9,9 @@
 -- create schema
 DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
-\C tournament
+\c tournament
 
 -- Drop tables
-
-DROP TABLE IF EXISTS tournament.players CASCADE;
-DROP TABLE IF EXISTS tournament.tournament CASCADE;
-DROP TABLE IF EXISTS tournament.match CASCADE;
 
 
 -- create players tables 
